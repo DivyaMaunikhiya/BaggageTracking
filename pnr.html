@@ -1,0 +1,115 @@
+<html>
+<head>
+    <title>Luggage Tracking</title>
+    <link rel="stylesheet" type="text/css" href="style1.css"> 
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyDRuhWOjlnrYTbpmNGMHQQfWSLBJi8bv94",
+          authDomain: "airport-iot.firebaseapp.com",
+          databaseURL: "https://airport-iot.firebaseio.com",
+          projectId: "airport-iot",
+          storageBucket: "airport-iot.appspot.com",
+          messagingSenderId: "916496017920",
+          appId: "1:916496017920:web:7318d38c84d3fdfe1d86e5",
+          measurementId: "G-9PH57XQ2XS"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+      </script>
+</head>
+    <body>
+    <div class="login-box">
+    <img src="logo2.png" class="avatar">
+        <h1>WELCOME TO LUGGAGE TRACKING PORTAL</h1>
+            <!-- <form> -->
+              <div id="enter">
+                <!-- <br><br><br> -->
+
+            <p><h3>Enter PNR</h3></p>
+            <input type="number" name="id" placeholder="Enter PNR" id="enter_pnr"/>
+           
+            <!-- <input type="submit" onclick="fetch();" name="submit" value="track" id="Track"> -->
+
+
+            <button class="button" onclick="fetch();" type="submit" value="Track" id="Track"><B>SUBMIT</B></button>
+
+
+
+            <!-- <button onclick="fetch();"  type="submit" value="Track" id="Track"> Submit</button> -->
+            <table id="tbl_users_list" border="10">
+             <tr>
+          
+              <th>OTP</th>
+              <th>Flight</th>
+              <th>Contact</th>
+              <th>Rfid</th>
+              <th>PNR</th>
+              <th>Stage2</th>
+              <th>Stage1</th>
+            </tr>
+           </table>
+               <!-- </form> -->
+    </div>
+        
+               <script>
+
+                function fetch( ){
+              
+                  var tblUsers = document.getElementById('tbl_users_list');
+                  var b= document.getElementById('enter_pnr').value;
+                  var databaseRef = firebase.database().ref('users/'+b);
+              
+                  var rowIndex = 1;
+                  var row= tblUsers.insertRow(rowIndex);
+               databaseRef.on('value', function(Snapshot) {
+                 if(Snapshot.val()==null)
+                 {
+                   document.write("User not registered");
+                 }
+              
+                  Snapshot.forEach(function(childSnapshot) {
+                //  var col = row.insertCell(rowIndex);
+                  var childKey = childSnapshot.key;
+                  var childData = childSnapshot.val();
+                    //document.write("User not registered");
+                  //document.write(childData.Rfid);
+                  var childNo = childSnapshot.val();
+              //   var cell_PNR = row.insertCell(0);
+               var cell_RFID = row.insertCell(0);
+              //   var cell_Flight = row.insertCell(2);
+                // var cell_Contact = row.insertCell(3);
+                 //cell_PNR.appendChild(document.createTextNode(childKey));
+                  cell_RFID.appendChild(document.createTextNode(childData));
+                  //cell_Flight.appendChild(document.createTextNode(childData.flight));
+                //  cell_Contact.appendChild(document.createTextNode(childData.Rfid));
+                 //var child = 10
+               //document.getElementById("display").innerHTML= childData;
+              //document.write(childData);
+                  // var row = tblUsers.insertRow(rowIndex);
+                  //var cellId = row.insertCell(0);
+                //   var cellName = row.insertCell(1);
+                //   cellId.appendChild(document.createTextNode(childKey));
+                   //cellName.appendChild(document.createTextNode(childData.user_name));
+              
+                   //rowIndex = rowIndex + 1;
+                   rowIndex = rowIndex + 1;
+               });
+              
+              });
+              
+              }
+               </script>
+        
+    <!-- </div> -->
+    
+    </body>
+</html>

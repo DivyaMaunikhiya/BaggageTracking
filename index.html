@@ -116,15 +116,7 @@ if ($json["status"]==="success") {
                snapshot.forEach(function(childSnapshot) {
               var childKey = childSnapshot.key;
              var childData = childSnapshot.val();
-           //  var childNo. = childSnapshot.val();
-           
-              //var row = tblUsers.insertRow(rowIndex);
-             // var cellId = row.insertCell(0);
-             // var cellName = row.insertCell(1);
-             // cellId.appendChild(document.createTextNode(childKey));
-              //cellName.appendChild(document.createTextNode(childData.user_name));
-           
-              //rowIndex = rowIndex + 1;
+          
                });
              });
              function myFunction() {
@@ -250,7 +242,7 @@ if ($json["status"]==="success") {
              }
            
            
-           
+           /* Function for deleting the user from our database. */
            
              function delete_user(){
               var Pnr = document.getElementById('user_id').value;
